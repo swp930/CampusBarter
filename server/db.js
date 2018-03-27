@@ -15,7 +15,7 @@ var path = require('path')
 var app = express()
 var router = express.Router()
 
-var port = process.env.API_PORT || 3001;
+var port = process.env.PORT || 3001;
 
 mongoose.Promise = global.Promise
 mongoose.connect('mongodb://cbdevelopers:IssaVibeCB321!@ds123556.mlab.com:23556/cbdb');
