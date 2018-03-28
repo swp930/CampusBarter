@@ -36,17 +36,27 @@ app.use(function(req, res, next) {
 });
 
 //now  we can set the route path & initialize the API
-router.get('/', function(req, res) {
+/*router.get('/', function(req, res) {
   res.sendFile(path.resolve(__dirname, '../build','index.html'))
 });
 
 //Use our router configuration when we call /api
 app.use(express.static(path.resolve(__dirname, 'build')))
-app.use('/api', router);
+app.use('/api', router);*/
 app.use('/items', items);
 app.use('/comments', comments);
 app.use('/users', users);
 app.use('/services', services);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('build'));
+
+  const path = require('path');
+  app.get('*', (request, result) => {
+    result.sendFile(path.resolve(__dirname, '../build/', 'index.html'));
+  });
+}
+
 //starts the server and listens for requests
 app.listen(port, function() {
   console.log(`api running on port ${port}`);
