@@ -152,7 +152,7 @@ class Inbox extends React.Component {
       <div>
         <center>
           <div style={{background:"transparent"}} className="jumbotron">
-            <h1 className="jumbotron-heading">Inbox</h1>
+            <h1 className="jumbotron-heading"><b>Inbox</b></h1>
             <p className="lead text-muted">Communicate. Buy. Sell. Trade.</p>
           </div>
         </center>
