@@ -6,8 +6,8 @@ class Services extends React.Component {
   constructor(props){
     super(props)
     this.state  = {
-      servicesUrl: "http://localhost:3001/api/services",
-      usersUrl: "http://localhost:3001/api/users",
+      servicesUrl: "https://campusbarter.herokuapp.com/services",
+      usersUrl: "https://campusbarter.herokuapp.com/users",
       servicesData:[],
       usersData:[],
       mounted:false,

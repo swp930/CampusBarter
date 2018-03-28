@@ -7,7 +7,7 @@ class Inbox extends React.Component {
     super(props)
     this.state = {
       usersData:[],
-      usersUrl:"http://localhost:3001/api/users",
+      usersUrl:"https://campusbarter.herokuapp.com/users",
       nounted: false,
       currentSender: "",
       message: "",
@@ -130,7 +130,7 @@ class Inbox extends React.Component {
         if((i+1)%3==0)
           index++
       }
-      
+
       list = arr2.map((x,index) => {
         return(
           <div className="row">

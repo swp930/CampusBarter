@@ -6,8 +6,8 @@ class Barterlist extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      itemsUrl: "http://localhost:3001/api/items",
-      usersUrl: "http://localhost:3001/api/users",
+      itemsUrl: "https://campusbarter.herokuapp.com/items",
+      usersUrl: "https://campusbarter.herokuapp.com/users",
       itemsData:[],
       usersData:[],
       mounted:false,
