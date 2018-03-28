@@ -6,6 +6,6 @@ import history from './history'
 
 ReactDOM.render(
   <Router history={history}>
-    <App />
+    <App currentUser="Harsh Karia"/>
   </Router>
   , document.getElementById('root'));
