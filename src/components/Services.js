@@ -167,7 +167,7 @@ class Services extends React.Component {
       <div>
         <center>
           <div style={{background:"transparent"}} className="jumbotron">
-            <h1 className="jumbotron-heading">Services</h1>
+            <h1 className="jumbotron-heading"><b>Services</b></h1>
             <p className="lead text-muted">Any task. This second.</p>
             <br / >
 		 <button type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#postModal">Post a Service</button>
