@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'
 import {withRouter} from 'react-router'
 import Main from './Main'
+import PAYMENT_SERVER_URL from './constants';
 
 class App extends React.Component {
   constructor(props){

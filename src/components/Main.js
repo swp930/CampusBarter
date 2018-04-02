@@ -5,16 +5,17 @@ import Barterfeed from './Barterfeed'
 import Inbox from './Inbox'
 import Barterlist from './Barterlist'
 import Services from './Services'
+import Login from './Login'
 
 class Main extends React.Component {
   constructor(props){
     super(props)
   }
-
+//<Route exact path ="/" component={Barterlist}/>
   render(){
     return(
       <Switch>
-        <Route exact path ="/" component={Barterlist}/>
+        <Route exact path ="/" component={Barterfeed}/>
         <Route path = "/barterlist" render={()=>{
             return(<Barterlist currentUser={this.props.currentUser}/>)
           }

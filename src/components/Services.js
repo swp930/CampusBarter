@@ -1,13 +1,14 @@
 import React from 'react'
 import axios from 'axios'
 import Serv from './Serv'
+import PAYMENT_SERVER_URL from './constants';
 
 class Services extends React.Component {
   constructor(props){
     super(props)
     this.state  = {
-      servicesUrl: "https://campusbarter.herokuapp.com/services",
-      usersUrl: "https://campusbarter.herokuapp.com/users",
+      servicesUrl: PAYMENT_SERVER_URL+"/services",
+      usersUrl: PAYMENT_SERVER_URL+"/users",
       servicesData:[],
       usersData:[],
       mounted:false,

@@ -1,13 +1,14 @@
 import React from 'react'
 import Message from './Message'
 import axios from 'axios'
+import PAYMENT_SERVER_URL from './constants';
 
 class Inbox extends React.Component {
   constructor(props){
     super(props)
     this.state = {
       usersData:[],
-      usersUrl:"https://campusbarter.herokuapp.com/users",
+      usersUrl:PAYMENT_SERVER_URL+"/users",
       nounted: false,
       currentSender: "",
       message: "",
