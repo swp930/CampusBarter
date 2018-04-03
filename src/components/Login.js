@@ -11,7 +11,7 @@ class Login extends React.Component {
   responseGoogle(response) {
     Auth.authenticateUser(response.w3.ig)
     console.log(response)
-    //window.location.reload();
+    window.location.reload();
   }
   render(){
     return(
