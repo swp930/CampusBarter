@@ -10,7 +10,6 @@ class Login extends React.Component {
   }
   responseGoogle(response) {
     Auth.authenticateUser(response)
-    console.log(this.props)
     console.log(response)
     window.location.reload();
   }
