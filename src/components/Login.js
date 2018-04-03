@@ -9,9 +9,9 @@ class Login extends React.Component {
     this.responseGoogle = this.responseGoogle.bind(this)
   }
   responseGoogle(response) {
-    Auth.authenticateUser(response.w3.ig)
+    Auth.authenticateUser(response)
     console.log(this.props)
-    console.log(response.w3.ig)
+    console.log(response)
     window.location.reload();
   }
   render(){
