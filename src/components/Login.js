@@ -15,7 +15,7 @@ class Login extends React.Component {
     axios.get(BACKEND_SERVER_URL+"/users/acc/"+response.w3.ig).then(res => {
       console.log(res)
     })
-    window.location.reload();
+    //window.location.reload();
   }
   render(){
     return(
