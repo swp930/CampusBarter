@@ -1,7 +1,7 @@
 import React from 'react'
 import GoogleLogin from 'react-google-login'
 import Auth from './../Auth'
-
+import BACKEND_SERVER_URL from './constants/server';
 
 class Login extends React.Component {
   constructor(props){
@@ -12,6 +12,9 @@ class Login extends React.Component {
     Auth.authenticateUser(response.w3.ig)
     console.log(response)
     window.location.reload();
+    axios.get(BACKEND_SERVER_URL+"/users/acc/"+response.w3.ig).then(function(){
+        console.log("Hello")
+    })
   }
   render(){
     return(
