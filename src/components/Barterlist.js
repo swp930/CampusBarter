@@ -183,13 +183,13 @@ class Barterlist extends React.Component{
             <button type="button" className="close" data-dismiss="modal">&times;</button>
           </div>
           <div className="modal-body">
-      <label for="user-name"><b>Name:</b></label>
+      <label htmlFor="user-name"><b>Name:</b></label>
               <input type="text" className="form-control" id="name" onChange={this.handleNameChange}></input>
-              <label for="service-name" className="col-form-label"><b>Who is the owner of this item?</b></label>
+              <label htmlFor="service-name" className="col-form-label"><b>Who is the owner of this item?</b></label>
               <input type="text" className="form-control" id="owner" onChange={this.handleOwnerChange}></input>
-      <label for="service-name" className="col-form-label"><b>Is this item for sale? (true or false value)?</b></label>
+      <label htmlFor="service-name" className="col-form-label"><b>Is this item for sale? (true or false value)?</b></label>
               <input type="text" className="form-control" id="sold" onChange={this.handleCostChange}></input>
-              <label for="description-text" className="col-form-label"><b>Give a short description of the service:</b></label>
+              <label htmlFor="description-text" className="col-form-label"><b>Give a short description of the service:</b></label>
               <textarea className="form-control" id="desc-text" onChange={this.handleDescChange}></textarea>
           </div>
           <div className="modal-footer">
@@ -212,11 +212,11 @@ class Barterlist extends React.Component{
             <div className="modal-body">
               <form>
                 <div className="form-group">
-                  <label for="recipient-name" className="form-label"><b>Recipient:</b></label>
+                  <label htmlFor="recipient-name" className="form-label"><b>Recipient:</b></label>
                   <p>{this.state.currentOwner}</p>
                 </div>
                 <div className="form-group">
-                  <label for="message-text" className="col-form-label"><b>Message:</b></label>
+                  <label htmlFor="message-text" className="col-form-label"><b>Message:</b></label>
                   <textarea className="form-control" id="message-text" onChange={this.handleMessageChange}></textarea>
                 </div>
               </form>

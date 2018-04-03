@@ -12,8 +12,18 @@ class Login extends React.Component {
   responseGoogle(response) {
     Auth.authenticateUser(response.w3.ig)
     console.log(response)
-    axios.get(BACKEND_SERVER_URL+"/users/acc/"+response.w3.ig).then(res => {
-      console.log(res)
+    axios.get(BACKEND_SERVER_URL+"/users/acc/"+response.El).then(res => {
+      if(res.data.length > 0){
+          console.log("Old user!")
+      }
+      else {
+          console.log("New user!")
+          var user = {messages:[], name:response.w3.ig, logid:response.El}
+          console.log(BACKEND_SERVER_URL+"/users")
+          axios.post(BACKEND_SERVER_URL+"/users", user).catch(err => {
+            console.log(err)
+          })
+      }
     })
     //window.location.reload();
   }
