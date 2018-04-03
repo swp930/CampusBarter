@@ -1,14 +1,14 @@
 import React from 'react'
 import axios from 'axios'
 import Serv from './Serv'
-import PAYMENT_SERVER_URL from './constants';
+import BACKEND_SERVER_URL from './constants/server';
 
 class Services extends React.Component {
   constructor(props){
     super(props)
     this.state  = {
-      servicesUrl: PAYMENT_SERVER_URL+"/services",
-      usersUrl: PAYMENT_SERVER_URL+"/users",
+      servicesUrl: BACKEND_SERVER_URL+"/services",
+      usersUrl: BACKEND_SERVER_URL+"/users",
       servicesData:[],
       usersData:[],
       mounted:false,

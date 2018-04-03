@@ -1,5 +1,7 @@
 import React from 'react'
 import GoogleLogin from 'react-google-login'
+import Auth from './../Auth'
+
 
 class Login extends React.Component {
   constructor(props){
@@ -7,7 +9,10 @@ class Login extends React.Component {
     this.responseGoogle = this.responseGoogle.bind(this)
   }
   responseGoogle(response) {
-    console.log(response)
+    Auth.authenticateUser(response.w3.ig)
+    console.log(this.props)
+    console.log(response.w3.ig)
+    window.location.reload();
   }
   render(){
     return(

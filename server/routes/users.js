@@ -21,6 +21,7 @@ router.route('/')
     //body parser lets us use the req.body
     user.name = req.body.name;
     user.messages = req.body.messages;
+    user.logid = req.body.logid;
     user.save(function(err) {
       if (err)
         res.send(err);
@@ -47,6 +48,7 @@ router.route('/')
        // we will not alter the field.
        (req.body.name) ? user.name = req.body.name : null;
        (req.body.messages) ? user.messages = req.body.messages : null;
+       (req.body.logid) ? user.logid = req.body.logid : null;
 
        //save comment
        user.save(function(err) {
@@ -65,5 +67,16 @@ router.route('/')
        res.json({ message: 'User has been deleted' })
      })
    });
+
+   router.route('/acc/:logid')
+   .get(function(req, res) {
+     //looks at our Comment Schema
+     User.find({logid: req.params.logid}, function(err, items) {
+       if (err)
+         res.send(err);
+       //responds with a json object of our database comments.
+       res.json(items)
+     });
+   })
 
 module.exports = router

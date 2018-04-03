@@ -8,7 +8,8 @@ var Schema = mongoose.Schema;
 //the shape of your database entries.
 var UsersSchema = new Schema({
   name: String,
-  messages: Object
+  messages: Object,
+  logid: String
 });
 
 //export our module to use in server.js

@@ -1,14 +1,14 @@
 import React from 'react'
 import Item from './Item'
 import axios from 'axios'
-import PAYMENT_SERVER_URL from './constants'
+import BACKEND_SERVER_URL from './constants/server';
 
 class Barterlist extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      itemsUrl: PAYMENT_SERVER_URL+"/items",
-      usersUrl: PAYMENT_SERVER_URL+"/users",
+      itemsUrl: BACKEND_SERVER_URL+"/items",
+      usersUrl: BACKEND_SERVER_URL+"/users",
       itemsData:[],
       usersData:[],
       mounted:false,

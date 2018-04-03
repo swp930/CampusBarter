@@ -8,6 +8,6 @@ import Auth from './Auth'
 
 ReactDOM.render(
   <Router history={history}>
-    {!Auth.isUserAuthenticated() ? <App currentUser="Harsh Karia"/> : <Login />}
+    {Auth.isUserAuthenticated() ? <App currentUser="Harsh Karia"/> : <Login />}
   </Router>
   , document.getElementById('root'));

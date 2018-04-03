@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'
 import {withRouter} from 'react-router'
 import Main from './Main'
-import PAYMENT_SERVER_URL from './constants';
+import BACKEND_SERVER_URL from './constants/server';
+import Auth from './../Auth'
 
 class App extends React.Component {
   constructor(props){
@@ -12,7 +13,7 @@ class App extends React.Component {
       itemsUrl:"http://localhost:3001/api/items",
       usersUrl:"http://localhost:3001/api/users",
       itemsData: [],
-      classnames: ["nav-item active", "nav-item", "nav-item", "nav-item"]
+      classnames: ["nav-item active", "nav-item", "nav-item", "nav-item", "nav-item"]
     }
     this.handleClick = this.handleClick.bind(this)
   }
@@ -22,23 +23,30 @@ class App extends React.Component {
     switch(num){
       case 1:
         this.setState({
-          classnames: ["nav-item active", "nav-item", "nav-item", "nav-item"]
+          classnames: ["nav-item active", "nav-item", "nav-item", "nav-item", "nav-item"]
         })
         break;
       case 2:
           this.setState({
-            classnames: ["nav-item", "nav-item active", "nav-item", "nav-item"]
+            classnames: ["nav-item", "nav-item active", "nav-item", "nav-item", "nav-item"]
           })
           break;
       case 3:
           this.setState({
-            classnames: ["nav-item", "nav-item", "nav-item active", "nav-item"]
+            classnames: ["nav-item", "nav-item", "nav-item active", "nav-item", "nav-item"]
           })
           break;
       case 4:
           this.setState({
-             classnames: ["nav-item", "nav-item", "nav-item", "nav-item active"]
+             classnames: ["nav-item", "nav-item", "nav-item", "nav-item active", "nav-item"]
           })
+          break;
+      case 5:
+          this.setState({
+             classnames: ["nav-item", "nav-item", "nav-item", "nav-item", "nav-item active"]
+          })
+          Auth.deauthenticateUser();
+          window.location.reload();
           break;
       default:
         break;
@@ -76,11 +84,14 @@ class App extends React.Component {
                 <a className="nav-link" href="#">Inbox</a>
               </li>
               </Link>
+              <li className={this.state.classnames[4]} data-id="5" onClick={this.handleClick}>
+                <a className="nav-link" href="#">Logout</a>
+              </li>
             </ul>
           </div>
         </div>
         </nav>
-        <Main currentUser={this.props.currentUser}/>
+        <Main currentUser={Auth.getId()}/>
         </div>
       )
     }

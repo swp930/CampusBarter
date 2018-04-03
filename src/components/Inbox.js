@@ -1,14 +1,14 @@
 import React from 'react'
 import Message from './Message'
 import axios from 'axios'
-import PAYMENT_SERVER_URL from './constants';
+import BACKEND_SERVER_URL from './constants/server';
 
 class Inbox extends React.Component {
   constructor(props){
     super(props)
     this.state = {
       usersData:[],
-      usersUrl:PAYMENT_SERVER_URL+"/users",
+      usersUrl:BACKEND_SERVER_URL+"/users",
       nounted: false,
       currentSender: "",
       message: "",
@@ -26,7 +26,7 @@ class Inbox extends React.Component {
   updateUsers(id, user){
     axios.put(`${this.state.usersUrl}/${id}`, user)
     .catch(err => {
-      console.log(err)
+      //console.log(err)
     })
   }
 
@@ -53,7 +53,7 @@ class Inbox extends React.Component {
       deleteMessage: name,
       currentSender: sender
     })
-    console.log(name)
+    //console.log(name)
   }
 
   handleMessageChange(event){
@@ -85,16 +85,16 @@ class Inbox extends React.Component {
     var i = 0
     for(i = 0; i < arr.length; i++){
       if(arr[i].name==this.props.currentUser){
-        console.log(arr[i].name)
+        //console.log(arr[i].name)
         var user = arr[i]
         var mail = {sender: this.state.currentSender, message: this.state.deleteMessage}
-        console.log(mail)
+        //console.log(mail)
         var messages = user.messages
-        console.log(messages)
+        //console.log(messages)
         var a = 0
         for(a = 0; a < messages.length; a++){
           if(messages[a].sender == mail.sender && messages[a].message == mail.message){
-            console.log(a)
+            //console.log(a)
             messages.splice(a,1)
           }
         }
