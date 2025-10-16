@@ -1,11 +1,12 @@
-class Auth{
-  static authenticateUser(id){
+class Auth {
+  static authenticateUser(id) {
     localStorage.setItem('id', id);
   }
 
-  static isUserAuthenticated(){
+  static isUserAuthenticated() {
     console.log(localStorage.getItem('id'));
-    return localStorage.getItem('id') != null;
+    //return localStorage.getItem('id') != null;
+    return true
   }
 
   static getId() {
