@@ -4,14 +4,14 @@ import Serv from './Serv'
 import BACKEND_SERVER_URL from './constants/server';
 
 class Services extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.state  = {
-      servicesUrl: BACKEND_SERVER_URL+"/services",
-      usersUrl: BACKEND_SERVER_URL+"/users",
-      servicesData:[],
-      usersData:[],
-      mounted:false,
+    this.state = {
+      servicesUrl: BACKEND_SERVER_URL + "/services",
+      usersUrl: BACKEND_SERVER_URL + "/users",
+      servicesData: [],
+      usersData: [],
+      mounted: false,
       name: "",
       owner: "",
       sold: "",
@@ -33,10 +33,10 @@ class Services extends React.Component {
     this.send = this.send.bind(this)
   }
 
-  load(){
-    if(!this.state.mounted){
+  load() {
+    if (!this.state.mounted) {
       this.setState({
-        mounted:true
+        mounted: true
       })
       this.loadServicesData()
       this.loadUsersData()
@@ -44,22 +44,22 @@ class Services extends React.Component {
     }
   }
 
-  loadServicesData(){
+  loadServicesData() {
     axios.get(this.state.servicesUrl)
       .then(res => {
         this.setState({ servicesData: res.data })
       })
-      console.log(this.state.servicesData)
+    console.log(this.state.servicesData)
   }
 
-  updateUsers(id, user){
+  updateUsers(id, user) {
     axios.put(`${this.state.usersUrl}/${id}`, user)
-    .catch(err => {
-      console.log(err)
-    })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
-  loadUsersData(){
+  loadUsersData() {
     axios.get(this.state.usersUrl)
       .then(res => {
         this.setState({ usersData: res.data })
@@ -67,64 +67,62 @@ class Services extends React.Component {
       })
   }
 
-  handleNameChange(event){
+  handleNameChange(event) {
     this.setState({
       name: event.target.value
     })
   }
 
-  handleOwnerChange(event){
+  handleOwnerChange(event) {
     this.setState({
       owner: event.target.value
     })
   }
 
-  handleCostChange(event){
-    var soldVal = event.target.value != "true"
+  handleCostChange(event) {
     this.setState({
       sold: event.target.value
     })
   }
 
-  handleDescChange(event){
+  handleDescChange(event) {
     this.setState({
       desc: event.target.value
     })
   }
 
-  register(name){
+  register(name) {
     this.setState({
       currentOwner: name
     })
     //console.log(this.state.currentOwner)
   }
 
-  postService(){
+  postService() {
     let services = this.state.servicesData
-    var service = {name:this.state.name, owner:this.state.owner, sold:this.state.sold, desc:this.state.desc}
-    let newServices = services.concat([service])
+    var service = { name: this.state.name, owner: this.state.owner, sold: this.state.sold, desc: this.state.desc }
     axios.post(this.state.servicesUrl, service)
       .catch(err => {
         console.log(err)
-        this.setState({ servicesData: services})
+        this.setState({ servicesData: services })
       })
   }
 
-  handleMessageChange(event){
+  handleMessageChange(event) {
     this.setState({
       message: event.target.value
     })
   }
 
-  send(){
+  send() {
     this.loadUsersData()
     var arr = this.state.usersData
     var i = 0
-    for(i = 0; i < arr.length; i++){
-      if(arr[i].name==this.state.currentOwner){
+    for (i = 0; i < arr.length; i++) {
+      if (arr[i].name === this.state.currentOwner) {
         var user = arr[i]
         console.log(arr[i]['_id'])
-        var mail = {sender:this.props.currentUser, message: this.state.message}
+        var mail = { sender: this.props.currentUser, message: this.state.message }
         user.messages.push(mail)
         console.log(user)
         this.updateUsers(arr[i]['_id'], user)
@@ -136,67 +134,67 @@ class Services extends React.Component {
     this.load()
     var arr = this.state.servicesData
     var arr2 = []
-    var count = Math.ceil(arr.length/3)
+    var count = Math.ceil(arr.length / 3)
     var i = 0
-    for(i =0; i < count; i++)
+    for (i = 0; i < count; i++)
       arr2.push([])
     var index = 0
-    for(i=0; i < arr.length; i++){
+    for (i = 0; i < arr.length; i++) {
       arr2[index].push(arr[i])
-      if((i+1)%3==0)
+      if ((i + 1) % 3 === 0)
         index++
     }
     var list = arr2.map((x, index) => {
-      return(
+      return (
         <div className="row">
-        {x.map((x, index) => {
-          return(
-            <Serv
-              name = {x.name}
-              owner = {x.owner}
-              sold = {x.sold}
-              desc = {x.desc}
-              onRegister={this.register}
+          {x.map((x) => {
+            return (
+              <Serv
+                name={x.name}
+                owner={x.owner}
+                sold={x.sold}
+                desc={x.desc}
+                onRegister={this.register}
               />
-          )
-        })}
+            )
+          })}
         </div>
       )
     })
-    return(
+    return (
 
       <div>
         <center>
-          <div style={{background:"transparent"}} className="jumbotron">
+          <div style={{ background: "transparent" }} className="jumbotron">
             <h1 className="jumbotron-heading"><b>Services</b></h1>
             <p className="lead text-muted">Any task. This second.</p>
-            <br / >
-		 <button type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#postModal">Post a Service</button>
+            <br />
+            <button type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#postModal">Post a Service</button>
           </div>
         </center>
 
         <div className="modal fade" id="postModal" role="dialog">
-        <div className="modal-dialog">
+          <div className="modal-dialog">
 
-          <div className="modal-content">
-            <div className="modal-header">
-              <h4 className="modal-title">Post a Service</h4>
-              <button type="button" className="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div className="modal-body">
-				<label for="user-name"><b>Name:</b></label>
+            <div className="modal-content">
+              <div className="modal-header">
+                <h4 className="modal-title">Post a Service</h4>
+                <button type="button" className="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div className="modal-body">
+                <label for="user-name"><b>Name:</b></label>
                 <input type="text" className="form-control" id="name" onChange={this.handleNameChange}></input>
                 <label for="service-name" className="col-form-label"><b>Who is the owner of this item?</b></label>
                 <input type="text" className="form-control" id="owner" onChange={this.handleOwnerChange}></input>
-				<label for="service-name" className="col-form-label"><b>Is this service for sale? (true or false value)?</b></label>
+                <label for="service-name" className="col-form-label"><b>Is this service for sale? (true or false value)?</b></label>
                 <input type="text" className="form-control" id="sold" onChange={this.handleCostChange}></input>
                 <label for="description-text" className="col-form-label"><b>Give a short description of the service:</b></label>
                 <textarea className="form-control" id="desc-text" onChange={this.handleDescChange}></textarea>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.postService}>Post</button>
-            </div>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.postService}>Post</button>
+              </div>
             </div>
           </div>
         </div>
@@ -225,8 +223,8 @@ class Services extends React.Component {
                   </form>
                 </div>
                 <div className="modal-footer">
-                    <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.send}>Send</button>
+                  <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={this.send}>Send</button>
                 </div>
               </div>
             </div>

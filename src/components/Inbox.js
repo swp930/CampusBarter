@@ -4,11 +4,11 @@ import axios from 'axios'
 import BACKEND_SERVER_URL from './constants/server';
 
 class Inbox extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
-      usersData:[],
-      usersUrl:BACKEND_SERVER_URL+"/users",
+      usersData: [],
+      usersUrl: BACKEND_SERVER_URL + "/users",
       nounted: false,
       currentSender: "",
       message: "",
@@ -23,24 +23,24 @@ class Inbox extends React.Component {
     this.delete = this.delete.bind(this)
   }
 
-  updateUsers(id, user){
+  updateUsers(id, user) {
     axios.put(`${this.state.usersUrl}/${id}`, user)
-    .catch(err => {
-      //console.log(err)
-    })
+      .catch(err => {
+        //console.log(err)
+      })
   }
 
-  load(){
-    if(!this.state.mounted){
+  load() {
+    if (!this.state.mounted) {
       this.setState({
-        mounted:true
+        mounted: true
       })
       this.loadUsersData()
       setInterval(this.loadUsersData, 800)
     }
   }
 
-  loadUsersData(){
+  loadUsersData() {
     axios.get(this.state.usersUrl)
       .then(res => {
         this.setState({ usersData: res.data })
@@ -48,7 +48,7 @@ class Inbox extends React.Component {
     //console.log(this.state.usersData)
   }
 
-  normal(name, sender){
+  normal(name, sender) {
     this.setState({
       deleteMessage: name,
       currentSender: sender
@@ -56,22 +56,22 @@ class Inbox extends React.Component {
     //console.log(name)
   }
 
-  handleMessageChange(event){
+  handleMessageChange(event) {
     this.setState({
       message: event.target.value
     })
   }
 
-  send(){
+  send() {
     this.loadUsersData()
 
     var arr = this.state.usersData
     var i = 0
-    for(i = 0; i < arr.length; i++){
-      if(arr[i].name==this.state.currentSender){
+    for (i = 0; i < arr.length; i++) {
+      if (arr[i].name === this.state.currentSender) {
         var user = arr[i]
         //console.log(arr[i]['_id'])
-        var mail = {sender:this.props.currentUser, message: this.state.message}
+        var mail = { sender: this.props.currentUser, message: this.state.message }
         user.messages.push(mail)
         //console.log(user)
         this.updateUsers(arr[i]['_id'], user)
@@ -80,79 +80,78 @@ class Inbox extends React.Component {
     this.delete()
   }
 
-  delete(){
+  delete() {
     var arr = this.state.usersData
     var i = 0
-    for(i = 0; i < arr.length; i++){
-      if(arr[i].name==this.props.currentUser){
+    for (i = 0; i < arr.length; i++) {
+      if (arr[i].name === this.props.currentUser) {
         //console.log(arr[i].name)
         var user = arr[i]
-        var mail = {sender: this.state.currentSender, message: this.state.deleteMessage}
+        var mail = { sender: this.state.currentSender, message: this.state.deleteMessage }
         //console.log(mail)
         var messages = user.messages
         //console.log(messages)
         var a = 0
-        for(a = 0; a < messages.length; a++){
-          if(messages[a].sender == mail.sender && messages[a].message == mail.message){
+        for (a = 0; a < messages.length; a++) {
+          if (messages[a].sender === mail.sender && messages[a].message === mail.message) {
             //console.log(a)
-            messages.splice(a,1)
+            messages.splice(a, 1)
           }
         }
         user.messages = messages
-        this.updateUsers(arr[i]['_id'],user)
+        this.updateUsers(arr[i]['_id'], user)
       }
     }
   }
 
-  render(){
+  render() {
     this.load()
     var rra = this.state.usersData
     var a = 0
     var arr = rra[0]
-    for(a = 0; a < rra.length; a++)
-    {
-       if(rra[a].name == this.props.currentUser)
-          arr =rra[a]
+    for (a = 0; a < rra.length; a++) {
+      if (rra[a].name === this.props.currentUser)
+        arr = rra[a]
     }
     var arr2 = []
     var count = 0
     var i = 0
     var list = null
-    if(arr!=null){
+    if (arr != null) {
       //console.log(arr.messages)
       arr = arr.messages
-      count = Math.ceil(arr.length/3)
-      for(i = 0; i < count; i++)
+      count = Math.ceil(arr.length / 3)
+      for (i = 0; i < count; i++)
         arr2.push([])
       var index = 0
-      for(i=0; i<arr.length; i++){
-        if(arr[i]!=null && arr2[index]!=null)
+      for (i = 0; i < arr.length; i++) {
+        if (arr[i] != null && arr2[index] != null)
           arr2[index].push(arr[i])
-        if((i+1)%3==0)
+        if ((i + 1) % 3 === 0)
           index++
       }
 
-      list = arr2.map((x,index) => {
-        return(
+      list = arr2.map((x, index) => {
+        return (
           <div className="row">
-          {x.map((x,index) => {
-            return(
-              <Message
-                sender = {x.sender}
-                message = {x.message}
-                onNormal = {this.normal}
+            {x.map((x, index) => {
+              return (
+                <Message
+                  sender={x.sender}
+                  message={x.message}
+                  onNormal={this.normal}
                 />
-            )
-          })}
+              )
+            })}
           </div>
         )
       })
     }
 
-    return(
+    return (
       <div>
         <center>
-          <div style={{background:"transparent"}} className="jumbotron">
+          <div style={{ background: "transparent" }} className="jumbotron">
             <h1 className="jumbotron-heading"><b>Inbox</b></h1>
             <p className="lead text-muted">Communicate. Buy. Sell. Trade.</p>
           </div>
@@ -166,16 +165,16 @@ class Inbox extends React.Component {
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-			           <h4 className="modal-title" id="myModalLabel">Successfully Declined</h4>
-                 <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 className="modal-title" id="myModalLabel">Successfully Declined</h4>
+                <button type="button" className="close" data-dismiss="modal" aria-hidden="true">&times;</button>
               </div>
               <div className="modal-body">
                 <p>Transaction with buyer was declined.</p>
               </div>
               <div className="modal-footer">
-				          <div className="col-12 text-center">
-                    <button type="button" className="btn btn-default btn-block" data-dismiss="modal" onClick={this.delete}>Confirm</button>
-				          </div>
+                <div className="col-12 text-center">
+                  <button type="button" className="btn btn-default btn-block" data-dismiss="modal" onClick={this.delete}>Confirm</button>
+                </div>
               </div>
             </div>
           </div>

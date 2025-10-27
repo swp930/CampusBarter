@@ -14,10 +14,8 @@
     "react-scripts": "1.1.1"
   },
   "scripts": {
-    "start": "npm i && react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "server": "node ./server/db.js"
+    "start": "serve -s build -l $PORT",
+    "local_start": "serve -s build -l 5135"
   }
 }

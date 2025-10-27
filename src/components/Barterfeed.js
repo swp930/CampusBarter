@@ -1,16 +1,13 @@
 import React from 'react'
-import Auth from './../Auth'
+//import Auth from './../Auth'
 
 class Barterfeed extends React.Component {
-  constructor(props){
-    super(props)
-  }
 
-  componentDidMount(){
+  componentDidMount() {
   }
 
   render() {
-    return(
+    return (
       <h1>Barter Feed</h1>
     )
   }
